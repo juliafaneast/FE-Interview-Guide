@@ -12,6 +12,8 @@
 
 ## [值传递和引用传递](#for-reference)
 
+## [js常见的算法面试题](#for-algorithm)
+
 <a id="for-introduction">
   
 ## Introduction
@@ -195,4 +197,48 @@
     console.log(copy); // {name: "tino"}
     ```
 
+<a id="for-algorithm">
+  
+## js常见的算法面试题
+    
+</a>
 
+- ### js 统计一个字符串出现频率最高的字母/数字
+- Solution 1:
+    ```
+    console.time('1');
+    let str = 'qwertwergggg1115gtttt66890jjjkk550llllnnnfhjfkg88876666';
+    const strArr = [...str];
+    const strObj = {};
+    let maxKey = strArr[0];
+    strArr.forEach((item) => {
+    strObj[item] = strObj[item] === undefined ? 1 : strObj[item] + 1;
+    if (strObj[item] > strObj[maxKey]) {
+        maxKey = item;
+    }
+    });
+    console.log(maxKey);
+    console.timeEnd('1'); // 1: 0.48876953125ms
+    ```
+
+- Solution 2:
+    ```
+    console.time('1');
+    let str = 'qwertwergggg1115gtttt66890jjjkk550llllnnnfhjfkg88876666';
+    const strArr = [...str]
+    const strSet = new Set(strArr);
+    let maxKey = '';
+    let maxValue = 0;
+    strSet.forEach(value => {
+    const num = strArr.filter(item => item === value).length;
+    if (num > maxValue) {
+        maxValue = num;
+        maxKey = value;
+    }
+    });
+    console.log(maxKey);
+    console.log(maxValue);
+    console.timeEnd('1'); // 0.877197265625ms
+    ```
+
+对比Solution 1 和 Solution 2， 对于一般的字符串， Solution 1效率更高。
