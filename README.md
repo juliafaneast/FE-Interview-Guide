@@ -12,6 +12,10 @@
 
 ## [值传递和引用传递](#for-reference)
 
+## [原型和原型链](#for-prototype)
+
+## [实现继承的几种方式](#for-extend)
+
 ## [js常见的算法面试题](#for-algorithm)
 
 <a id="for-introduction">
@@ -196,6 +200,28 @@
     var copy = JSON.parse(JSON.stringify(person));
     console.log(copy); // {name: "tino"}
     ```
+
+<a id="for-prototype">
+  
+## 原型和原型链
+    
+</a>
+
+- ### 原型和原型链
+- 实例是对象的构造函数创建出来的
+- 实例的原型对象指向类/对象的原型 
+- 原型的原型对象指向继承类/对象的原型
+### 具体关系如下图
+![image](images/prototype.jpeg
+)
+
+<a id="for-extend">
+  
+## 实现继承的几种方式
+    
+</a>
+
+- ###  [实现继承的几种方式](https://www.cnblogs.com/humin/p/4556820.html)  *该内容参考其他博客，紧供参考，转载请注明出处*
 
 <a id="for-algorithm">
   
