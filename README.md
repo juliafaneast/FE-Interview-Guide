@@ -1,8 +1,10 @@
-# JS/ES 常见问题
+# 前端 常见问题
 
 ## Table of contents
 
 ## [Introduction](#for-introduction)
+
+## JS Part
 
 ## [JS 中的数据类型](#for-data-type)
 
@@ -18,12 +20,20 @@
 
 ## [js常见的算法面试题](#for-algorithm)
 
+## CSS Part
+## [CSS 中的伪类](#for-pseudo-class)
+## [CSS 中的新功能](#for-new-css)
+
+## 其他
+## [SPA的优缺点](#for-spa)
+## [SSR](#for-spa)
+
 <a id="for-introduction">
   
 ## Introduction
     
 </a>
-本篇文章主要用于记录一些日常工作中遇到的js问题，以便以后查询
+本篇文章主要用于记录一些前端问题，以便以后查询
 
 <a id="for-data-type">
   
@@ -268,3 +278,128 @@
     ```
 
 对比Solution 1 和 Solution 2， 对于一般的字符串， Solution 1效率更高。
+
+<a id="for-pseudo-class">
+  
+## CSS 中的伪类
+    
+</a>
+
+- ### :root
+    ```
+    :root指代html 元素；除非有特殊的更高级别的元素;通常用来定义全局的css
+    ```
+    - #### 通常用法
+        ````
+        :root {
+            --my-customize-var: red;
+        }
+
+        .test {
+            background-color: var(--my-customize-var)
+        }
+        ````
+- ### :is
+    ```
+    
+    ```
+- ### :where
+    ```
+    /* Selects any paragraph inside a header, main
+    or footer element that is being hovered */
+    :where(header, main, footer) p:hover {
+    color: red;
+    cursor: pointer;
+    }
+
+    /* The above is equivalent to the following */
+    header p:hover,
+    main p:hover,
+    footer p:hover {
+    color: red;
+    cursor: pointer;
+    }
+    ```
+    **Note**
+    > The difference between :where() and :is() is that :where() always has 0 [specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity), whereas :is() takes on the specificity of the most specific selector in its arguments.  
+    > specificity: 可以理解为我们通常讲的权重 
+
+
+    
+<a id="for-new-css">
+  
+## CSS 中的新功能 （以下新功能可能存在兼容性问题，具体使用时要详细了解）
+    
+</a>
+
+- ### @support
+    ```
+    @support 是css的一个规则，用来检测浏览器是否支持某个css
+
+    @supports not(display: grid) {
+        div {
+            display: flex;
+        }
+    }
+
+    // 通过js获取这个rule
+    let myRules = document.styleSheets[0].cssRules;
+    console.log(myRules[0]); // a CSSSupportsRule representing the feature query.
+    ```
+- ### Flexbox Gaps (chrome 84+)
+    ```
+        gap: row-gap column-gap
+
+        // Usage example
+        .container {
+            display: flex;
+            gap: 1rem;
+        }
+    ```
+- ### content-visibility / contain-intrinsic-size (兼容性现在还不是太好)
+    ```
+    /* Keyword values */
+    content-visibility: visible;
+    content-visibility: hidden;
+    content-visibility: auto;
+
+    /* Global values */
+    content-visibility: initial;
+    content-visibility: unset;
+    ```  
+
+<a id="for-spa">
+  
+## SPA的优缺点
+    
+</a>
+
+- ### **什么是SPA**
+    - #### SPA 是指渲染完成的应用最终只有一个html。 它只用加载一次整个页面的所有资源，之后的操作就是自定义加载内容，不需刷新整个html。
+
+- ### **缺陷**
+1.  ### spa 对seo 不友好
+    - #### why？
+        > SPA是客户端渲染，通过加载执行JS来创建DOM元素构建页面，但是爬虫只是请求静态资源，不会执行JS文件，所以抓取不到DOM结构，也分析不出来有用的信息。
+    - ### [SEO](https://baike.baidu.com/item/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/3132?fr=aladdin)
+        - #### seo的方法主要有两种
+            - ##### 白帽 - 通过优化网页代码，来提高网站排名
+            - ##### 黑帽 - 采用违法的方法；恶意制造/替换虚假网站搜索内容提高网站排名
+    - ### 如何seo （首页就10个排名的位置）
+        - #### 尽量多一些静态网页；使se搜索速度快
+        - #### 关键词要符合用户习惯，突出 （title, alt, heading, meta）
+2. ### spa首次渲染慢
+    - 按需加载会优化首次渲染慢的问题 lazyload
+
+- ### **优点**
+    - #### 前后端分离，使得开发任务更加明确；提高了可复用性，可移植性
+    - #### 多端可共用同一套api服务
+    - #### 交互相应更快，提高用户体验
+    - #### 前端开发更加模块，组建化，提高了代码的复用性
+
+
+<a id="for-ssr">
+  
+## SSR
+    
+</a>
